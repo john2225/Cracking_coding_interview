@@ -1,4 +1,5 @@
 #include <iostream>
+#include <string>
 
 bool checkPermutation(const std::string&, const std::string&);
 
