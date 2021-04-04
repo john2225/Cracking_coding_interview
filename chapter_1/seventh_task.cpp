@@ -4,8 +4,8 @@
 int** create_matrix(size_t&, size_t&);
 void fill_array(int** arr, size_t, size_t);
 void print(int**, size_t, size_t);
-void rotate_matrix(int**, size_t, size_t);
-void delete_arr(int**, size_t, size_t);
+void rotate_matrix(int**, size_t);
+void delete_arr(int**, size_t);
 
 
 int main()
@@ -15,15 +15,13 @@ int main()
     int** created_array = create_matrix(N, M);
     fill_array(created_array, N, M);
     print(created_array, N, M);
-    rotate_matrix(created_array, N, M);
+    rotate_matrix(created_array, N);
     print(created_array, N, M);
-
-    
-    delete_arr(created_array, N, M);
+    delete_arr(created_array, N);
     return 0;
 }
 
-int** create_matrix(size_t& column, size_t& row)
+int** create_matrix(size_t& row, size_t& column)
 {
     std::cout << "Enter size of column: ";
     std::cin >> column;
@@ -39,22 +37,22 @@ int** create_matrix(size_t& column, size_t& row)
     return arr;
 }
 
-void fill_array(int** arr, size_t column, size_t row)
+void fill_array(int** arr, size_t row, size_t column)
 {
-    for(int i = 0; i < column; ++i)
+    for(int i = 0; i < row; ++i)
     {
-        for(int j = 0; j < row; ++j)
+        for(int j = 0; j < column; ++j)
         {
             arr[i][j] = rand() % 10;
         }
     }
 }
 
-void print(int** arr, size_t column, size_t row)
+void print(int** arr, size_t row, size_t column)
 {
-    for(int i = 0; i < column; ++i)
+    for(int i = 0; i < row; ++i)
     {
-        for(int j = 0; j < row; ++j)
+        for(int j = 0; j < column; ++j)
         {
             std::cout << arr[i][j] << " ";
         }
@@ -62,27 +60,26 @@ void print(int** arr, size_t column, size_t row)
     }
 }
 
-void rotate_matrix(int** arr, size_t column, size_t row)
+void rotate_matrix(int** arr, size_t row)
 {
-    for(int i = 0; i < column / 2; ++i)
+    for(int i = 0; i < row / 2; ++i)
     {
-        for(int j = i; j < column - i - 1; ++j)
+        for(int j = i; j < row - i - 1; ++j)
         {
             int tmp = arr[i][j];
-            arr[i][j] = arr[j][column - 1 - i];
-            arr[j][column - 1 - i] = arr[column - 1 - i][column - 1 - j];
-            arr[column - 1 - i][column - 1 - j] = arr[column - 1 - j][i];
-            arr[column - 1 - j][i] = tmp;
-            
+            arr[i][j] = arr[j][row - 1 - i];
+            arr[j][row - 1 - i] = arr[row - 1 - i][row - 1 - j];
+            arr[row - 1 - i][row - 1 - j] = arr[row - 1 - j][i];
+            arr[row - 1 - j][i] = tmp;
             
         }
     }
 }
 
 
-void delete_arr(int** arr, size_t column, size_t row)
+void delete_arr(int** arr, size_t column)
 {
-    for(int i = 0; i < row; ++i)
+    for(int i = 0; i < column; ++i)
     {
         delete[] arr[i];
     }
